@@ -17,32 +17,32 @@ io.on('connection', (socket) => {
   // 连接成功之后的回调函数
   socket.on('moveBoxToLeft',() => {
     console.log('left')
-    io.emit('moveBoxToLeft')
-    // socket.broadcast.emit('moveBoxToLeft')
+    // io.emit('moveBoxToLeft')
+    socket.broadcast.emit('moveBoxToLeft')
   })
 
   socket.on('moveBoxToRight',() => {
     console.log('right')
-    io.emit('moveBoxToRight')
-    // socket.broadcast.emit('moveBoxToRight')
+    // io.emit('moveBoxToRight')
+    socket.broadcast.emit('moveBoxToRight')
   })
 
   socket.on('rotateBox',() => {
     console.log('rotate')
-    io.emit('rotateBox')
-    // socket.broadcast.emit('rotateBox')
+    // io.emit('rotateBox')
+    socket.broadcast.emit('rotateBox')
   })
 
   socket.on('moveBoxToDown',() => {
     console.log('down')
-    io.emit('moveBoxToDown')
-    // socket.broadcast.emit('moveBoxToDown')
+    // io.emit('moveBoxToDown')
+    socket.broadcast.emit('moveBoxToDown')
   })
 
   socket.on('createBox',(info) => {
     console.log('box')
-    io.emit('createBox',info)
-    // socket.broadcast.emit('createBox')
+    // io.emit('createBox',info)
+    socket.broadcast.emit('createBox',info)
   })
 })
 

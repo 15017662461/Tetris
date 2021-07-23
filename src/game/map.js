@@ -58,7 +58,7 @@ function getCanEliminateLines(map) {
 
 function _eliminate(lines, map) {
   const col = map[0].length
-  lines.reverse().forEach(i => {
+  lines.forEach(i => {
     map.splice(i, 1)
     map.unshift(Array(col).fill(0))
   })
