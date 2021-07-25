@@ -1,3 +1,5 @@
+import { hitBorder, hitBox } from "./hit";
+
 export function getBoxBottomPoints(matrix) {
   //  其实还是有点问题
   const row = matrix.length;
@@ -65,7 +67,10 @@ export function getBoxAllPoints(matrix){
 
 
 
-export function rotate(matrix) {
+export function rotate(box,map) {
+  const matrix = box.shape
+  // 列 = 行
+  // 行 = 总行数 - 1 - 当前列
   const row = matrix.length
   const col = matrix[0].length
 
@@ -79,6 +84,18 @@ export function rotate(matrix) {
       }
       r[k][i] = matrix[i][j]
     }
+  }
+  const tempBox = {
+    shape:r,
+    x:box.x,
+    y:box.y
+  }
+  const points = getBoxAllPoints(tempBox.shape)
+  if(hitBorder({box:tempBox,points,type:"left"}) || 
+      hitBorder({box:tempBox,points,type:"right"}) || 
+      hitBorder({box:tempBox,points,type:"bottom"}) ||
+      hitBox({box:tempBox,points,map})){
+    return matrix
   }
   return r
 }

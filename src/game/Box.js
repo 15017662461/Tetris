@@ -1,7 +1,8 @@
 import { rotate } from "./matrix"
+import { gameCol, gameRow } from "./config"
 export class Box {
   constructor() {
-    this.x = 0
+    this.x = gameCol / 2 - 1
     this.y = 0
     this.shape = [
       [1, 1],
@@ -10,10 +11,10 @@ export class Box {
   }
   _rotates = []
   _rotateIndex = 0
-  rotate() {
+  rotate(map) {
     const rotateFn = this._rotates[this._rotateIndex]
-    if(!rotateFn) return 
-    this.shape = rotateFn.call(null, this.shape)
+    if (!rotateFn) return
+    this.shape = rotateFn.call(null, this,map)
     if (this._rotateIndex >= this._rotates.length) {
       this._rotateIndex = 0
     }
@@ -27,14 +28,14 @@ export class Box {
 
 const boxInfos = {
   1: {
-    type:1,
+    type: 1,
     shape: [
       [1, 1],
       [1, 1]
     ]
   },
   2: {
-    type:2,
+    type: 2,
     shape: [
       [1, 0, 0],
       [1, 1, 0],
@@ -43,13 +44,13 @@ const boxInfos = {
     rotateStrategy: [rotate, (m) => rotate(rotate(rotate(m)))]
   },
   3: {
-    type:3,
+    type: 3,
     shape: [
       [1, 0, 0],
       [1, 0, 0],
       [1, 1, 0]
     ],
-    rotateStrategy: [rotate,rotate,rotate,rotate]
+    rotateStrategy: [rotate, rotate, rotate, rotate]
   }
 }
 
@@ -60,7 +61,7 @@ const boxInfos = {
 export function createBox() {
   let box = new Box()
 
-  const { shape, rotateStrategy,type } = getRandomBoxInfo()
+  const { shape, rotateStrategy, type } = getRandomBoxInfo()
 
   box.shape = shape
   box.type = type
@@ -72,7 +73,7 @@ export function createBox() {
 export function createBoxByType(key) {
   let box = new Box()
 
-  const { shape, rotateStrategy,type } = boxInfos[key]
+  const { shape, rotateStrategy, type } = boxInfos[key]
 
   box.shape = shape
   box.type = type

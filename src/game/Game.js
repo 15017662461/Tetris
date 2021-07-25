@@ -76,7 +76,7 @@ export class Game {
   }
 
   rotateBox() {
-    this._activeBox.rotate()
+    this._activeBox.rotate(this._map)
   }
 
   moveBoxToDown() {
