@@ -17,7 +17,7 @@ export class Rival{
     message.on('moveBoxToDown',this.moveBoxToDownMsg.bind(this))
     message.on('createBox',this.createBoxMsg.bind(this))
   }
-  
+
   _boxInfo = null
   _init = false
   handleCreateBox(){

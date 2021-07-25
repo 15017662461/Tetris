@@ -1,13 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" href="/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.js"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" href="/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vite App</title>
+</head>
+
+<body>
+  <div id="app"></div>
+  <script type="module" src="/src/main.js"></script>
+  <script>
+    // 实现一个get函数：根据字符串执行对象的链式调用
+    // function get(obj,chain,defaultVal)
+    // 举例：
+    // const obj = {
+    //   a:{
+    //     b:[[{c:1}],[{c:2}]]
+    //   }
+    // }
+    // get(obj,'a.b[1][0].c',0) // 输出2
+    // get(obj,'a.b.c',0) // 输出0
+    // get(obj,'a.b[0][1].c','undefined') // 输出'undefined'
+
+    // function get(obj, chain, defaultVal) {
+    //   const arr = chain.split('.') // arr = ['a','b[1][0]','c']
+    //   let temp = obj;
+    //   for (let i = 0; i < arr.length; i++) {
+    //     const a = arr[i]
+    //     if (a.indexOf('[') != -1) {
+    //       // 包含[ 也就是说有数组形式 'b[1][0]'
+    //       const nums = a.replace(/(])/g, '').split('[')
+    //       const pre = nums[0]
+    //       temp = temp[pre]
+    //       for (let j = 1; j < nums.length; j++) {
+    //         try {
+    //           temp = temp[nums[j]]
+    //         } catch (e) {
+    //           return defaultVal
+    //         }
+    //       }
+    //     } else {
+    //       // 不包含[ 也就是 不是数组形式
+    //       temp = temp[a]
+    //     }
+    //     if (!temp) {
+    //       return defaultVal
+    //     }
+    //   }
+    //   return temp
+    // }
+
+    // const obj = {
+    //   a: {
+    //     b: [
+    //       [{
+    //         c: 1
+    //       }],
+    //       [{
+    //         c: 2
+    //       }]
+    //     ]
+    //   }
+    // }
+
+    // console.log(get(obj, 'a.b[0][0].c', 0))
+
+    // const obj1 = {
+    //   a: 2,
+    //   b: 3
+    // }
+
+    // obj1[Symbol.iterator] = function* () {
+    //   for (let prop in obj1) {
+    //     yield obj1[prop]
+    //   }
+    // }
+
+    // for (let i of obj1) {
+    //   console.log(i)
+    // }
+
+    // function makeIterator(start = 0, end = Infinity, step = 1) {
+    //   return {
+    //     next() {
+    //       if (start >= end) {
+    //         return {
+    //           value: end,
+    //           done: true,
+    //         }
+    //       }
+    //       const value = start
+    //       start = start + step
+    //       return {
+    //         value,
+    //         done: false
+    //       }
+    //     }
+    //   }
+    // }
+    function* makeIterator(start = 0, end = Infinity, step = 1) {
+      for (let i = start; i <= end; i = i + step) {
+        yield i
+      }
+    }
+
+    var test = 2
+
+    function a() {
+      var test = 1
+      function b() {
+        console.log(test) // 
+      }
+      b()
+    }
+
+    a()
+  </script>
+</body>
+
 </html>

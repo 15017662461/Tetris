@@ -16,6 +16,7 @@ export class Game {
   }
 
   _createBoxStrategy = null
+
   start() {
     this._activeBox = this._createBoxStrategy()
     addTicker(this.handleTicker.bind(this))
@@ -26,7 +27,7 @@ export class Game {
   }
 
   down() {
-    // 不可以超过屏幕的底部和右边，以及不能碰到底部的盒子
+    // 当碰撞到底部边界或者碰撞到底部的固化盒子后自身被固化
     if (hitBottomBorder(this._activeBox) || hitBottomBox(this._map, this._activeBox)) {
       // 为了不让box达到底部的时候被reset清除掉，让map对应的位置变为-1
       addBoxToMap(this._map, this._activeBox)
