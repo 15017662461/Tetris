@@ -6,10 +6,26 @@
   <link rel="icon" href="/favicon.ico" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Vite App</title>
+  <style>
+    #app {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .box {
+      width: 50px;
+      height: 50px;
+      background-color: red;
+    }
+  </style>
 </head>
 
 <body>
-  <div id="app"></div>
+  <div id="app">
+    <div class="first box"></div>
+    <div class="second box"></div>
+    <div class="third box"></div>
+  </div>
   <script type="module" src="/src/main.js"></script>
   <script>
     // 实现一个get函数：根据字符串执行对象的链式调用
@@ -100,23 +116,826 @@
     //     }
     //   }
     // }
-    function* makeIterator(start = 0, end = Infinity, step = 1) {
-      for (let i = start; i <= end; i = i + step) {
-        yield i
+    // function* makeIterator(start = 0, end = Infinity, step = 1) {
+    //   for (let i = start; i <= end; i = i + step) {
+    //     yield i
+    //   }
+    // }
+
+    // var test = 2
+
+    // function a() {
+    //   var test = 1
+    //   function b() {
+    //     console.log(test) // 
+    //   }
+    //   b()
+    // }
+
+    // a()
+
+
+    // Function.prototype.myBind = function(thisArgs){
+    //   const _this = this
+    //   const args = Array.from(arguments).slice(1)
+    //   return function(){
+    //     _this.apply(thisArgs,args.concat(Array.from(arguments)))
+    //   }
+    // }
+
+
+    // function a(e,b,c,d){
+    //   return e + b+ c+ d
+    // }
+
+
+    // const c = a.myBind(null,1)
+    // console.log(c(1,2,3))
+
+    // 自己实现一个bind
+    // Function.prototype.myBind = function (thisArgs, ...args) {
+    //   const _this = this
+    //   return function (...cargs) {
+    //     _this.call(thisArgs, ...args.concat(cargs))
+    //   }
+    // }
+
+    // function a(b, c, d) {
+    //   console.log('bind!!!')
+    //   return b + c+ d
+    // }
+    // var obj = {
+    //   a: 1
+    // }
+    // var bc = a.myBind(obj)
+    // console.log(bc(1,2,3))
+
+    // 函数柯里化
+    // function curry(fn,length,thisArgs = null){
+    //   const len = length || fn.length
+    //   let arr = []
+    //   return function temp(){
+    //     const args = Array.prototype.slice.call(arguments)
+    //     arr.push(...args)
+    //     console.log(arr.length)
+    //     if(arr.length >= len){
+    //       let res = fn.apply(thisArgs,arr)
+    //       arr = []
+    //       return res
+    //     }else{
+    //       return temp
+    //     }
+    //   }
+    // }
+
+
+    // function add(a,b,c,d){
+    //   return a+ b+c+d
+    // }
+
+    // const nadd = curry(add)
+    // console.log(nadd(1,2)(3)(4))
+
+    // function deepClone(origin, target) {
+    //   var target = target || new origin.constructor
+    //   const typeStr = Object.prototype.toString
+    //   const objStr = '[object Object]'
+    //   for (let prop in origin) {
+    //     if (origin.hasOwnProperty(prop)) {
+    //       if (typeof origin[prop] != 'object') {
+    //         target[prop] = origin[prop]
+    //       } else {
+    //         if (origin[prop] instanceof RegExp) {
+    //           target[prop] = new RegExp(origin[prop])
+    //         } else {
+    //           target[prop] = typeStr.call(origin[prop]) === objStr ? {} : []
+    //           deepClone(origin[prop], target[prop])
+    //         }
+    //       }
+    //     }
+    //   }
+    //   return target
+    // }
+
+
+    // function quickSort(arr) {
+    //   helper(arr, 0, arr.length - 1)
+    //   return arr
+    // }
+
+    // function helper(arr,left,right){
+    //   let l = left,r = right
+    //   let pivot = Math.floor((left+right)/2)
+    //   let temp
+    //   while(l <r){
+    //     while(arr[l] < pivot){
+    //       l ++
+    //     }
+    //     while(arr[r] > pivot){
+    //       r --
+    //     }
+    //     if(l >= r) break
+    //     temp = arr[r]
+    //     arr[r] = arr[l]
+    //     arr[l] = temp
+    //     if(arr[l] == pivot) r --
+    //     if(arr[r] == pivot) l ++
+    //   }
+    //   if(l == r) {
+    //     l ++
+    //     r --
+    //   }
+    //   if(r > left){
+    //     helper(arr,left,r)
+    //   }
+    //   if(l < right){
+    //     helper(arr,l,right)
+    //   }
+    // }
+
+
+    // function flat(arr){
+    //   let s = JSON.stringify(arr)
+    //   s = s.replace(/(\[|\])/g,'')
+    //   s = '[' + s +']'
+    //   return JSON.parse(s)
+    // }
+
+    // function flat(arr){
+    //   return arr.reduce((a,b) => a.concat(Array.isArray(b) ? flat(b) : b),[])
+    // }
+
+    // 防抖
+    // function debounce(fn,timeout){
+    //   let timer
+    //   return function(){
+    //     const context = this
+    //     const args=  arguments
+    //     if(timer) clearTimeout(timer)
+    //     timer = setTimeout(() => {
+    //       fn.apply(fn,args)
+    //     })
+    //   }
+    // }
+
+    // 节流
+    // function throttle(fn,timeout){
+    //   let timer
+    //   return function(){
+    //     const context = this
+    //     const args = arguments
+    //     if(!timer){
+    //       timer = setTimeout(() => {
+    //         fn.apply(context,args)
+    //       },timer)
+    //     }
+    //   }
+    // }
+
+    //  实现LazyMan(流程控制、消息队列)
+    // function LazyMan(name) {
+    //   class _lazyMan {
+    //     constructor(name) {
+    //       this.task = []
+    //       let fn = () => {
+    //         console.log('hi!This is' + name + '!')
+    //         this.next()
+    //       }
+    //       this.task.push(fn)
+    //       setTimeout(() => {
+    //         this.next()
+    //       }, 0)
+    //     }
+    //     next() {
+    //       const fn = this.task.shift()
+    //       typeof fn === 'function' && fn()
+    //     }
+    //     eat(sth) {
+    //       let fn = () => {
+    //         console.log("Eat " + sth + "~");
+    //         this.next()
+    //       }
+    //       this.task.push(fn)
+    //       return this
+    //     }
+    //     sleep(time) {
+    //       const fn = () => {
+    //         setTimeout(() => {
+    //           console.log("Wake up after " + time + "s!");
+    //           this.next()
+    //         }, time * 1000)
+    //       }
+    //       this.task.push(fn)
+    //       return this
+    //     }
+    //     sleepFirst(time) {
+    //       let fn = () => {
+    //         setTimeout(() => {
+    //           console.log("Wake up after " + time + "s!");
+    //           this.next();
+    //         }, time * 1000);
+    //       }
+    //       this.task.unshift(fn);
+    //       return this;
+    //     }
+    //   }
+    //   return new _lazyMan(name)
+    // }
+    // LazyMan('Hank').sleepFirst(5).eat('supper');
+
+
+    // 事件总线/EventEmitter
+    // class EventEmitter {
+    //   constructor() {
+    //     this.map = new Map()
+    //   }
+    //   on(type, fn) {
+    //     const handler = this.map.get(type)
+    //     if(!handler){
+    //       this.map.set(type,handler)
+    //     }else{
+    //       if(Array.isArray(handler)){
+    //         handler.push(fn)
+    //       }else{
+    //         map.set(type,[handler,fn])
+    //       }
+    //     }
+    //   }
+    //   emit(type,...args){
+    //     const handler = this.map.get(type)
+    //     if(!handler){
+    //       throw Error('没有该事件，需要先绑定事件')
+    //     }else{
+    //       if(Array.isArray(handler)){
+    //         handler.forEach(f => f.call(this,...args))
+    //       }else{
+    //         handler.call(this,...args)
+    //       }
+    //     }
+    //   }
+    // }
+    // 实现大数加法,传入的是两个字符串形式的大数
+    // function add(a,b){
+    //   let i = a.length - 1
+    //   let j = b.length - 1
+    //   let res = ''
+    //   let carry = 0
+    //   while(i >= 0 || j >= 0){
+    //     let x = 0
+    //     let y = 0
+    //     let sum
+    //     if(i >= 0){
+    //       x = a[i] - '0'
+    //       i --
+    //     }
+    //     if(j >= 0){
+    //       y = b[j] - '0'
+    //       j --
+    //     }
+    //     sum = x + y + carry
+    //     if(sum >= 10){
+    //       carry = 1
+    //       sum = sum - 10
+    //     }else{
+    //       carry = 0
+    //     }
+    //     res = sum + res
+    //   }
+    //   if(carry){
+    //     res = carry +res 
+    //   }
+    //   return res
+    // }
+
+    // 一个0,1数组 A，最多将 K 个值从 0 变成 1 ， 返回仅包含 1 的最长子数组的长度
+    // let max=  0
+    // function main(arr,k){
+    //   test(arr,0,k)
+    // }
+    // function test(arr,index,k){
+    //   if(index === arr.length || k === 0){
+    //     let len = 0
+    //     for(let i = 0;i < arr.length;i ++){
+    //       if(arr[i] === 1){
+    //         len ++
+    //         max = Math.max(max,len)
+    //       }else{
+    //         len = 0
+    //       }
+    //     }
+    //   }
+    //   for(let i = 0;i <arr.length;i ++){
+    //     if(arr[i] === 0){
+    //       arr[i] = 1
+    //       test(arr,index+1,k-1)
+    //       arr[i] = 0
+    //     }
+    //   }
+    // }
+
+    // 链表翻转
+    // class Node{
+    //   constructor(value,next){
+    //     this.value = value
+    //     this.next = next
+    //   }
+    // }
+
+    // function reverse(head){
+    //   let pre = null
+    //   let cur = head
+    //   while(cur){
+    //     let next = cur.next
+    //     cur.next = pre
+    //     pre = cur
+    //     cur = next
+    //   }
+    //   return pre
+    // }
+
+    // const node1 = new Node(1)
+    // const node2 = new Node(2)
+    // const node3 = new Node(3)
+    // const node4 = new Node(4)
+    // const node5 = new Node(5)
+    // const node6 = new Node(6)
+    // const node7 = new Node(7)
+    // const node8 = new Node(8)
+
+    // node1.next = node2
+    // node2.next = node3
+    // node3.next = node4
+    // node4.next = node5
+    // node5.next = node6
+    // node6.next = node7
+    // node7.next = node8
+
+    // console.log(reverse(node1))
+
+
+    // k个一组翻转链表
+    // class Node{
+    //   constructor(value,next){
+    //     this.value = value
+    //     this.next = next
+    //   }
+    // }
+
+    // function reverseByK(head,k){
+    //   if(!head) return null
+    //   let start = head,end = head
+    //   for(let i = 0;i < k;i ++){
+    //     if(end == null) return head
+    //     end = end.next
+    //   }
+    //   const newHead = helper(start,tail)
+    //   start.next = reverseByK(end,k)
+    //   return newHead
+    // }
+
+    // function helper(head,tail){
+    //   let cur = head
+    //   let pre = null
+    //   while(cur != tail){
+    //     let next = cur.next
+    //     cur.next = pre
+    //     pre = cur
+    //     cur = next
+    //   }
+    //   return pre
+    // }
+
+
+    // 蛇形打印二叉树 第一行从左到右打印，第二行从右到左打印，第三行从左到右打印
+    // function printSnakeTree(root) {
+    //   let queue1 = []
+    //   let queue2 = []
+    //   let res = [
+    //     []
+    //   ]
+    //   let i = 0
+    //   queue1.push(root)
+    //   while (queue1.length || queue2.length) {
+    //     while (queue1.length) {
+    //       let temp = queue1.shift()
+    //       if (temp.left) {
+    //         queue2.push(temp.left)
+    //       }
+    //       if (temp.right) {
+    //         queue2.push(temp.right)
+    //       }
+    //       res[i].push(temp.value)
+    //     }
+    //     if (i % 2 != 0) {
+    //       res[i] = res[i].reverse()
+    //     }
+    //     res.push([])
+    //     i++
+    //     queue1 = queue2
+    //     queue2 = []
+    //   }
+    //   res.pop()
+    //   return res
+    // }
+
+    // class Node{
+    //   constructor(value,left,right){
+    //     this.value = value
+    //     this.left = left
+    //     this.right = right
+    //   }
+    // }
+
+    // const root = new Node(1)
+    // const node2 = new Node(2)
+    // const node3 = new Node(3)
+    // const node4 = new Node(4)
+    // const node5 = new Node(5)
+    // const node6 = new Node(6)
+    // const node7 = new Node(7)
+    // root.left = node2
+    // root.right = node3
+    // node2.left = node4
+    // node2.right = node5
+    // node4.left = node6
+    // node5.right = node7
+
+    // console.log(printSnakeTree(root))
+
+
+    // 合并区间
+    // function merge(arr) {
+    //   // arr = [[],[],[]]
+    //   arr.sort((a, b) => a[0] - b[0])
+    //   let res = []
+    //   // console.log(arr)
+    //   res.push(arr[0])
+    //   // console.log(res)
+    //   for(let i = 1;i < arr.length;i ++){
+    //     let cur = arr[i]
+    //     let pre = res[res.length - 1]
+    //     console.log(cur,pre)
+    //     if(cur[0] <= pre[1]){
+    //       pre[1] = Math.max(pre[1],cur[1])
+    //     }else{
+    //       res.push(cur)
+    //     }
+    //   }
+    //   return res
+    // }
+
+    // 实现函数柯里化
+    // function curry(fn){
+    //   const len = fn.length
+    //   let arr = []
+    //   return function temp(...args){
+    //     arr.push(...args)
+    //     if(arr.length >= len){
+    //       let res = fn(...arr)
+    //       arr = []
+    //       return res
+    //     }else{
+    //       return temp
+    //     }
+    //   }
+    // }
+
+    // 二叉树的最近公共祖先
+    // function lowestCommonAncestor(root,p,q){
+    //   if(root == p || root == q || root == null){
+    //     return root
+    //   }
+    //   const left = lowestCommonAncestor(root.left,p,q)
+    //   const right = lowestCommonAncestor(root.right,p,q)
+    //   if(left && right){
+    //     return root
+    //   }else if(!left && right){
+    //     return right
+    //   }else if(!right && left){
+    //     return left
+    //   }else{
+    //     return null
+    //   }
+    // }
+    // const data = [{
+    //   country: 'China',
+    //   gold: 11,
+    //   silver: 5,
+    //   bronze: 8
+    // }, {
+    //   country: 'Japan',
+    //   gold: 11,
+    //   silver: 4,
+    //   bronze: 5
+    // }, {
+    //   country: 'USA',
+    //   gold: 10,
+    //   silver: 11,
+    //   bronze: 9
+    // }]
+
+    // function format(arr) {
+    //   const res = []
+    //   for (let i = 0; i < arr.length; i++) {
+    //     const country = arr[i].country
+    //     for (prop in arr[i]) {
+    //       if (prop != 'country') {
+    //         const obj = {
+    //           country
+    //         }
+    //         obj.modal = prop
+    //         obj.val = arr[i][prop]
+    //         res.push(obj)
+    //       }
+    //     }
+    //   }
+    //   return res
+    // }
+    // console.log(format(data))
+
+    // // 根据前序中序遍历还原二叉树
+    // function buildTree(preOrder, inOrder) {
+    //   if (!preOrder.length || !inOrder.length) return null
+    //   const root = new Node(preOrder[0])
+    //   const rootIndex = inOrder.indexOf(preOrder[0])
+    //   const preOrderLeft = preOrder.slice(1, 1 + rootIndex)
+    //   const preOrderRight = preOrder.slice(1 + rootIndex)
+    //   const inOrderLeft = inOrder.slice(0, rootIndex)
+    //   const inOrderRight = inOrder.slice(1 + rootIndex)
+    //   root.left = buildTree(preOrderLeft, inOrderLeft)
+    //   root.right = buildTree(preOrderRight, inOrderRight)
+    //   return root
+    // }
+
+    // 手写一个map
+    // Array.prototype.myMap = function (callback, context) {
+    //   const res = []
+
+    //   const arr = Array.prototype.slice.call(this)
+    //   for (let i = 0; i < arr.length; i++) {
+    //     res.push(callback.call(context, arr[i], i, this))
+    //   }
+    //   return res
+    // }
+
+    // // 手写一个reduce
+    // Array.prototype.myReduce = function (callback, initialVal) {
+    //   const arr = Array.prototype.slice.call(this)
+    //   let res = initialVal ? initialVal : arr[0]
+    //   let initIndex = initialVal ? 0 : 1
+    //   for (let i = initIndex; i < arr.length; i++) {
+    //     res = callback.call(null, res, arr[i], i, this)
+    //   }
+    //   return res
+    // }
+
+    // 手写一个promiseAll
+    // function promiseAll(promiseArr) {
+    //   if (!Array.isArray(promiseArr)) {
+    //     throw new Error('必须是一个数组！')
+    //   }
+    //   return new Promise((resolve, reject) => {
+    //     let arr = []
+    //     let i = 0
+
+    //     function handleData(index, data) {
+    //       arr[index] = data
+    //       i++
+    //       if (i === promiseArr.length) {
+    //         resolve(arr)
+    //       }
+    //     }
+
+    //     for(let i = 0;i < promiseArr.length;i ++){
+    //       promiseArr[i].then((data) => {
+    //         handleData(i,data)
+    //       },reject)
+    //     }
+    //   })
+    // }
+
+    // 快拍
+    // function quickSort(arr,left = 0,right = arr.length-1){
+    //   if(left >= right) return 
+    //   let i = left,j = right,flag = i
+    //   while(i < j){
+    //     while(arr[j] >= arr[flag] && j > flag){
+    //       j --
+    //     }
+    //     if(i >= j) break
+    //     while(arr[i] <= arr[flag] && i < j){
+    //       i ++
+    //     }
+    //     [arr[flag],arr[j],arr[i]] = [arr[j],arr[i],arr[flag]]
+    //     flag = i
+    //   }
+    //   quickSort(arr,left,flag - 1)
+    //   quickSort(arr,flag + 1,right)
+    //   return arr
+    // }
+
+    // 非递归快排
+    // function quickSort(arr, left = 0, right = arr.length - 1) {
+    //   let stack = [[left, right]]
+    //   while (stack.length > 0) {
+    //     var now = stack.pop()
+    //     if (now[0] >= now[1]) continue
+    //     let i = now[0],
+    //       j = now[1],
+    //       flag = i
+    //     while (i < j) {
+    //       while (arr[j] >= arr[flag] && j > flag) {
+    //         j--
+    //       }
+    //       if (i >= j) break
+    //       while (arr[i] <= arr[flag] && i < j) {
+    //         i++
+    //       }
+    //       [arr[flag], arr[j], arr[i]] = [arr[j], arr[i], arr[flag]]
+    //       flag = i
+    //     }
+    //     stack.push([now[0], flag - 1])
+    //     stack.push([flag + 1, now[1]])
+    //   }
+    //   return arr
+    // }
+
+    // function quick(arr, left = 0, right = arr.length - 1) {
+    //   var list = [
+    //     [left, right]
+    //   ]; // 模拟栈
+    //   while (list.length > 0) {
+    //     var now = list.pop()
+    //     if (now[0] >= now[1]) continue;
+    //     var i = now[0],
+    //       j = now[1],
+    //       flag = i;
+    //     while (i < j) {
+    //       while (arr[j] >= arr[flag] && j > flag) j--;
+    //       if (i >= j) break;
+    //       while (arr[i] <= arr[flag] && i < j) i++;
+    //       [arr[flag], arr[j], arr[i]] = [arr[j], arr[i], arr[flag]]
+    //       flag = i
+    //     }
+    //     list.push([now[0], flag - 1]);
+    //     list.push([flag + 1, now[1]]);
+    //   }
+    //   return arr
+    // }
+
+    // 找出两数和数组
+    // function add(arr,target){
+    //   const res = []
+    //   arr.sort((a,b) => a-b)
+    //   let i = 0,j = arr.length - 1
+    //   while(i < j){
+    //     while(arr[i] == arr[i+1]) i ++
+    //     if(i >= j) break
+    //     while(arr[j] == arr[j+1]) j --
+    //     const sum = arr[i] + arr[j]
+    //     if(sum == target){
+    //       res.push([i,j])
+    //       i ++
+    //       j ++
+    //     }else if(sum < target){
+    //       i ++
+    //     }else{
+    //       j --
+    //     }
+    //   }
+    //   return res
+    // }
+
+    // 找出三叔和
+    // function add(arr){
+    //   arr.sort((a,b) => a-b)
+    //   const len = arr.length
+    //   const res = []
+    //   for(let i = 0;i < len;i ++){
+    //     if(i > 0 && arr[i] == arr[i-1]) continue
+    //     if(arr[i] > 0) break
+    //     let L = i + 1,R = len - 1
+    //     while(L < R){
+    //       const sum = arr[i] + arr[L] + arr[R]
+    //       if(sum === 0){
+    //         res.push([arr[i],arr[L],arr[R]])
+    //         while(arr[L] == arr[L + 1]) L ++
+    //         while(arr[R] == arr[R - 1]) R --
+    //         L ++
+    //         R --
+    //       }else if(sum < 0){
+    //         L ++
+    //       }else{
+    //         R --
+    //       }
+    //     }
+    //   }
+    //   return res
+    // }
+
+    // 手写instanceof
+    // function instanceOf(left,right){
+    //   let proto = left.__proto__
+    //   let rightP = right.prototype
+    //   while(proto){
+    //     if(proto == rightP) return true
+    //     proto = proto.__proto__
+    //   }
+    //   return false
+    // }
+    function small(name) {
+      if (name.includes('_')) {
+        const arr = name.split('_')
+        for (let i = 0; i < arr.length; i++) {
+          if (i == 0) {
+            arr[i] = arr[i].toLowerCase()
+          } else {
+            arr[i] = arr[i][0].toUpperCase() + arr[i].toLowerCase().slice(1)
+          }
+        }
+        return arr.join('')
+      } else {
+        let temp = name[0]
+        return temp.toLowerCase() + name.slice(1)
       }
     }
 
-    var test = 2
 
-    function a() {
-      var test = 1
-      function b() {
-        console.log(test) // 
+    // let indexArr = []
+    //     for(let i = 0;i < name.length;i ++){
+    //       var char = name[i].charCodeAt()
+    //       if(char>=65&&char<=90){
+    //         indexArr.push(i)
+    //       }
+    //     }
+    //     for(let i = 0;i < )
+
+
+    function reverseString(s) {
+      if (s.length < 2) return s
+      let l = 0,
+        r = s.length - 1
+      let temp
+      while (l < r) {
+        temp = s[l]
+        s[l] = s[r]
+        s[r] = temp
+        l++
+        r--
       }
-      b()
+      return s
     }
 
-    a()
+
+    function maxSquare(matrix) {
+      // write code here
+      let m = matrix.length
+      let n = matrix[0].length
+      let dp = new Array(m).fill(0).map(() => new Array(n).fill(0))
+      console.log(dp)
+      let max = 0
+      for (let i = 0; i < m; i++) {
+        if (matrix[i][0] === 1) {
+          dp[i][0] = 1
+          max = Math.max(max, dp[i][0])
+        }
+      }
+      for (let j = 0; j < n; j++) {
+        if (matrix[0][j] == 1) {
+          dp[0][j] = 1
+          max = Math.max(max, dp[0][j])
+        }
+      }
+      for (let i = 1; i < m; i++) {
+        for (let j = 1; j < n; j++) {
+          if ((matrix[i][j] == 1)) {
+            dp[i][j] = Math.min(dp[i - 1][j], dp[i][j - 1], dp[i - 1][j - 1]) + 1
+            max = Math.max(max, dp[i][j])
+          }
+        }
+      }
+      return max * max
+    }
+
+
+    // 区间合并
+    function merge(arr) {
+      arr.sort((a, b) => a[0] - b[0])
+      let stack = [arr[0]]
+      for (let i = 1; i < arr.length; i++) {
+        let pre = stack[stack.length - 1]
+        let cur = arr[i]
+        if (cur[0] <= pre[1]) {
+          pre[1] = Math.max(pre[1], cur[1])
+        } else {
+          stack.push(cur)
+        }
+      }
+      return stack
+    }
+
+
+    
   </script>
 </body>
 

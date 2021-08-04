@@ -74,19 +74,18 @@ export function rotate(box,map) {
   const row = matrix.length
   const col = matrix[0].length
 
-  let r = []
+  let origin = JSON.parse(JSON.stringify(matrix))
 
-  for (let i = 0; i < row; i++) {
-    for (let j = 0; j < col; j++) {
-      let k = row - 1 - j
-      if (!r[k]) {
-        r[k] = []
-      }
-      r[k][i] = matrix[i][j]
+  // 矩阵旋转
+  for(let i = 0;i < row-1;i ++){
+    for(let j = i + 1;j < col;j ++){
+      [matrix[i][j],matrix[j][i]] = [matrix[j][i],matrix[i][j]]
     }
   }
+  matrix.forEach(m => m.reverse())
+
   const tempBox = {
-    shape:r,
+    shape:matrix,
     x:box.x,
     y:box.y
   }
@@ -95,7 +94,7 @@ export function rotate(box,map) {
       hitBorder({box:tempBox,points,type:"right"}) || 
       hitBorder({box:tempBox,points,type:"bottom"}) ||
       hitBox({box:tempBox,points,map})){
-    return matrix
+    return origin
   }
-  return r
+  return matrix
 }

@@ -14,7 +14,7 @@ export class Box {
   rotate(map) {
     const rotateFn = this._rotates[this._rotateIndex]
     if (!rotateFn) return
-    this.shape = rotateFn.call(null, this,map)
+    this.shape = rotateFn.call(null, this, map)
     if (this._rotateIndex >= this._rotates.length) {
       this._rotateIndex = 0
     }
@@ -30,8 +30,9 @@ const boxInfos = {
   1: {
     type: 1,
     shape: [
-      [1, 1],
-      [1, 1]
+      [1, 1, 0],
+      [1, 1, 0],
+      [0, 0, 0]
     ]
   },
   2: {
